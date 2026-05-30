@@ -57,14 +57,18 @@ class Email:
 
     def edit_attachment(self):
         key_words = KeyWords.KeyWords().get_attachment_words()
+        correct_attachment = []
         for string in self.FullContent:
             string_words = string.split()
             for i in range(len(string_words)):
                 if string_words[i].strip(":").lower() in key_words:
                     if i + 1 < len(string_words):
-                        self.Attachment = " ".join(string_words[i + 1:])
-                        return True
-        return False
+                        correct_attachment.append(" ".join(string_words[i + 1:]))
+        if correct_attachment:
+            self.Attachment = correct_attachment
+            return True
+        else:
+            return False
 
     def edit_text(self):
         key_words = (KeyWords.KeyWords().get_from_words() + KeyWords.KeyWords().get_to_words() +
