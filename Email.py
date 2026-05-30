@@ -78,7 +78,7 @@ class Email:
         for string in self.FullContent:
             string_words = string.split()
             for i in range(len(string_words)):
-                if string_words[i].strip(":").lower() in key_words:
+                if string_words[i].strip(""":;.,!?/'" """).lower() in key_words:
                     break
             else:
                 correct_text.append(string)

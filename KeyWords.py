@@ -1,5 +1,5 @@
 class KeyWords:
-    SPAM_KEY_WORDS = ["http", "выиграть", "скидка"]
+    SPAM_KEY_WORDS = ["http", "выиграть", "выигрыш", "скидка", "розыгрыш", "приз"]
     URGENT_KEY_WORDS = ["срочно", "экстренно", "быстро"]
 
     FROM_KEY_WORDS = ["from", "от кого"]
