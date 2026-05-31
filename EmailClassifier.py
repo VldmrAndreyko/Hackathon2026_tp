@@ -7,8 +7,8 @@ class EmailClassifier:
         self.email = email
         self.SPAM_STATUS = "spam"
         self.URGENT_STATUS = "urgent"
-        self.NON_URGENT_STATUS = "non-urgent"
-        self.NON_CLASSIFIED_STATUS = "non-classified"
+        self.NON_URGENT_STATUS = "non_urgent"
+        self.NON_CLASSIFIED_STATUS = "non_classified"
         self.email_text = email.Text
 
     def classify_spam(self):
