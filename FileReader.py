@@ -10,7 +10,7 @@ class FileReader:
     def read_file(self, file_path: str):
         path = Path(file_path)
 
-        if not path.exists() or not path.is_file():
+        if not path.exists():
             self.stats['files_failed'] += 1
             raise ValueError("Указан неверный путь к файлу")
 
@@ -33,6 +33,25 @@ class FileReader:
         except Exception as error:
             self.stats['files_failed'] += 1
             raise error
+
+    def read_directory(self, dir_path: str):
+        path = Path(dir_path)
+
+        if not path.exists():
+            self.stats['files_failed'] += 1
+            raise ValueError("Указан неверный путь к директории")
+
+        if not path.is_dir():
+            self.stats['files_failed'] += 1
+            raise ValueError("По данному пути находится не директория")
+
+
+        emails = []
+        for file_path in path.glob("*"):
+            email = self.read_file(file_path)
+            emails.append(email)
+
+        return emails
 
 
 
