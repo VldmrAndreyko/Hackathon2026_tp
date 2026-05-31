@@ -36,3 +36,18 @@ class FileManager:
         except Exception as error:
             raise ValueError(f"Ошибка перемещения: {error}")
 
+    def count_files_in_each_category(self):
+        result = dict()
+
+        for category in self.categories:
+            path = self.base_dir/category
+            result[category] = 0
+
+            if not path.exists():
+                continue
+
+            for file in path.glob("*"):
+                if file.is_file():
+                    result[category] += 1
+
+        return result
