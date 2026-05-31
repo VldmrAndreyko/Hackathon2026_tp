@@ -63,8 +63,8 @@ class FileReader:
 
         return emails
 
+    def get_stats(self):
+        return self.stats
 
-
-
-
-
+    def reset_stats(self):
+        self.stats = {'files_read': 0, 'files_failed': 0}
