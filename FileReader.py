@@ -4,9 +4,10 @@ from Email import Email
 
 
 class FileReader:
-    def __init__(self):
+    def __init__(self, file_manager):
         self.stats = {'files_read': 0, 'files_failed': 0}
         self.extension = ".txt"
+        self.file_manager = file_manager
 
     def read_file(self, file_path: str):
         path = Path(file_path)
@@ -21,23 +22,25 @@ class FileReader:
 
         if path.suffix != self.extension:
             self.stats['files_failed'] += 1
-            raise ValueError(f"Расширение данного файла не поддерживается {path}")
-
+            self.file_manager.move_email(path, "non_classified")
+            return None
         try:
             with open (path, 'r') as file:
                 text = file.read()
-                if text.strip() == "":
-                    self.stats['files_failed'] += 1
-                    raise ValueError(f"Файл пустой {path}")
+            if text.strip() == "":
+                self.stats['files_failed'] += 1
+                self.file_manager.move_email(path, "non_classified")
+                return None
 
-                lines = text.splitlines()
-                email = Email(lines)
+            lines = text.splitlines()
+            email = Email(lines)
 
-                self.stats['files_read'] += 1
-                return email
-        except Exception as error:
+            self.stats['files_read'] += 1
+            return email
+        except:
             self.stats['files_failed'] += 1
-            raise error
+            self.file_manager.move_email(path, "non_classified")
+            return None
 
     def read_directory(self, dir_path: str):
         path = Path(dir_path)
@@ -55,11 +58,11 @@ class FileReader:
         for file_path in path.glob("*"):
             if file_path.is_dir():
                 continue
-            try:
-                email = self.read_file(file_path)
+
+            email = self.read_file(file_path)
+
+            if email is not None:
                 emails.append(email)
-            except Exception as error:
-                print(f"Ошибка чтения файла {file_path}: {error}")
 
         return emails
 
