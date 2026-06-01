@@ -16,7 +16,7 @@ for email in emails:
     category = classifier.classify()
 
     try:
-        manager.move_email(email, category)
+        manager.move_email(email.path, category)
     except Exception as error:
         print(f"Не удалось переместить файл {email.path}: {error}")
 
@@ -26,7 +26,7 @@ manager_stats = manager.count_files_in_each_category()
 print("Итоговая статистика:")
 
 print(f"Успешно прочитано: {reader_stats['files_read']} файлов")
-print(f"Не удалось прочитать: {reader_stats['file_failed']} файлов, они отправлены в папку 'non_classified'")
+print(f"Не удалось прочитать: {reader_stats['files_failed']} файлов, они отправлены в папку 'non_classified'")
 
-for category, count in manager_stats:
+for category, count in manager_stats.items():
     print(f"В папке {category}: {count} файлов")

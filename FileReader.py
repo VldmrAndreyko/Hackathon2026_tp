@@ -33,7 +33,7 @@ class FileReader:
                 return None
 
             lines = text.splitlines()
-            email = Email(lines, path)
+            email = Email(lines, str(path))
 
             self.stats['files_read'] += 1
             return email

@@ -9,7 +9,7 @@ class EmailClassifier:
         self.URGENT_STATUS = "urgent"
         self.NON_URGENT_STATUS = "non_urgent"
         self.NON_CLASSIFIED_STATUS = "non_classified"
-        self.email_text = email.Text
+        self.email_text = email.Text if email.Text is not None else []
 
     def classify_spam(self):
         key_words = KeyWords.KeyWords().get_spam_words()
