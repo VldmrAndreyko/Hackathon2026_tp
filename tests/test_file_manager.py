@@ -1,7 +1,7 @@
 import pytest
 from pathlib import Path
-from hackathon_tp.FileManager import FileManager
-from hackathon_tp.FileReader import FileReader
+from FileManager import FileManager
+from FileReader import FileReader
 
 
 
