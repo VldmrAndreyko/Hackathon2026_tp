@@ -8,7 +8,7 @@ class Email:
         self.Date = None
         self.Subject = None
         self.Attachment = None
-        self.Text = None
+        self.Text = message_text
 
         self.path = path
 
