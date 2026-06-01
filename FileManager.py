@@ -3,9 +3,10 @@ from pathlib import Path
 
 
 class FileManager:
-    def __init__(self, base_dir: str):
+    def __init__(self, base_dir: str, logger=None):
         self.base_dir = Path(base_dir)
         self.categories = ['spam', 'urgent', 'non_urgent', 'non_classified']
+        self.logger = logger
 
         self.create_folders()
 
@@ -32,8 +33,12 @@ class FileManager:
 
         try:
             shutil.move(source, target)
+            if self.logger is not None:
+                self.logger.log_file_moved(str(source), str(target), category)
 
         except Exception as error:
+            if self.logger is not None:
+                self.logger.log_error(str(source), str(error))
             raise ValueError(f"Ошибка перемещения: {error}")
 
     def count_files_in_each_category(self):

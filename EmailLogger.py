@@ -27,7 +27,6 @@ class EmailLogger:
 
     def log_file_read(self, file_name):
         self.add_log(f"Файл прочитан: {file_name}")
-
     def log_file_failed(self, file_name, reason, action=None):
         message = f"Файл не прочитан: {file_name}, причина: {reason}"
         if action is not None:
