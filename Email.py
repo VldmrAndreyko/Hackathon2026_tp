@@ -1,4 +1,6 @@
 import KeyWords
+from pymorphy3 import MorphAnalyzer
+analyzer = MorphAnalyzer()
 
 class Email:
     def __init__(self, message_text, path=None):
@@ -63,7 +65,8 @@ class Email:
         for string in self.FullContent:
             string_words = string.split()
             for i in range(len(string_words)):
-                if string_words[i].strip(":").lower() in key_words:
+                base_word = analyzer.parse(string_words[i])[0].normal_form.strip(""":;.,!?/'" """)
+                if base_word.lower() in key_words:
                     if i + 1 < len(string_words):
                         correct_attachment.append(" ".join(string_words[i + 1:]))
         if correct_attachment:
