@@ -1,7 +1,7 @@
 import KeyWords
 
 class Email:
-    def __init__(self, message_text):
+    def __init__(self, message_text, path=None):
         self.FullContent = message_text
         self.From = None
         self.To = None
@@ -9,6 +9,8 @@ class Email:
         self.Subject = None
         self.Attachment = None
         self.Text = None
+
+        self.path = path
 
     def edit_from(self):
         key_words = KeyWords.KeyWords().get_from_words()
