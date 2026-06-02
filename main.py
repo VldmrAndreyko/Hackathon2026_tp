@@ -5,7 +5,7 @@ from EmailClassifier import EmailClassifier
 from EmailLogger import EmailLogger
 
 logger = EmailLogger("logs/email_processing.log")
-logger.log_session_start(source="inbox", destination="sorted_inbox")
+logger.log_start()
 
 manager = FileManager("sorted_inbox", logger=logger)
 reader = FileReader(manager, logger=logger)

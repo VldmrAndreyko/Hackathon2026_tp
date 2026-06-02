@@ -39,7 +39,6 @@ class FileReader:
 
             lines = text.splitlines()
             email = Email(lines, str(path))
-
             self.stats['files_read'] += 1
             if self.logger:
                 self.logger.log_file_read(path.name)

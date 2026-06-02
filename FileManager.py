@@ -5,9 +5,8 @@ from pathlib import Path
 class FileManager:
     def __init__(self, base_dir: str, logger=None):
         self.base_dir = Path(base_dir)
-        self.categories = ['spam', 'urgent', 'non_urgent', 'non_classified']
+        self.categories = ['spam', 'urgent/no-attachments', 'urgent/attachments', 'non_urgent/attachments', 'non_urgent/no-attachments', 'non_classified']
         self.logger = logger
-
         self.create_folders()
 
     def create_folders(self):
